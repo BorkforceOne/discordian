@@ -50,7 +50,7 @@ export class ThreadSimulator implements Simulator {
   private parseThreads(input: string): Thread[] {
     // Split the thread into messages
     const threads: Thread[] = [];
-    const lines = input.split('\r\n');
+    const lines = input.split(/\r?\n/);
 
     let messages: ThreadMessage[] = [];
     let channel = "";

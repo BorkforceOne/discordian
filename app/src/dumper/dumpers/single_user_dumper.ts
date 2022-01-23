@@ -44,7 +44,6 @@ export class SingleUserDumper implements Dumper {
           prefix: MESSAGE_PREFIX,
           postfix: MESSAGE_POSTFIX,
           delimitter: MESSAGE_DELIMITTER,
-          format: '\n**{0}**:\n{1}',
         };
       }
 

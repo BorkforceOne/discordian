@@ -12,6 +12,8 @@ const SIMULATOR_MAP: { [M in Mode]: SimulatorConstructor } = {
   [Mode.THREADS]: ThreadSimulator,
 };
 
+process.on('unhandledRejection', console.log);
+
 // tslint:disable-next-line: no-floating-promises
 (async () => {
   try {
@@ -40,6 +42,7 @@ const SIMULATOR_MAP: { [M in Mode]: SimulatorConstructor } = {
 
       process.exit();
     });
+    client.on('error', console.log)
   }
   catch (e) {
     console.log(e);
