@@ -57,7 +57,7 @@ async function readChannelMessages(channel: TextChannel, dumper: Dumper) {
 function writeResults(data: { [entry: string]: string[] }, metadata: MetadataMap) {
   // Write out results
   for (const [entryId, entries] of Object.entries(data)) {
-    const file = `${DATA_DIR}\\${entryId}_messages.txt`;
+    const file = `${DATA_DIR}/${entryId}_messages.txt`;
     // Prefix/suffix each entry
     const fixedEntries = entries.map((entry) => MESSAGE_PREFIX + entry + MESSAGE_POSTFIX);
     fs.writeFileSync(file, fixedEntries.join('\n'));
