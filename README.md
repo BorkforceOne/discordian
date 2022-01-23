@@ -25,7 +25,7 @@ cd app
 npm install
 ```
 ### Configure
-Copy `data/config.example.json` => `data.config.json` and add relevant configuration.
+Copy `data/config.example.json` => `data/config.json` and add relevant configuration.
 ## Running
 ### Dump messages
 ```

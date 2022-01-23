@@ -22,8 +22,10 @@
         ]
     },
     "simulator": {
+        "outputChannel": "simulator",
         "alwaysGenerateNewMessages": true,
-        "dryRun": true
+        "dryRun": true,
+        "interactive": false
     },
     "training": {
         "model": "124M",

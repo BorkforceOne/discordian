@@ -55,5 +55,7 @@ export const USER_DENYLIST: string[] = config?.["dumper"]?.["sampleChannels"] ??
 export const BANNED_STRINGS: string[] = config?.["dumper"]?.["bannedStrings"] ?? [];
 export const ALWAYS_GENERATE_NEW_MESSAGES: boolean = config?.["simulator"]?.["alwaysGenerateNewMessages"] ?? false;
 export const SIMULATOR_DRY_RUN: boolean = config?.["simulator"]?.["dryRun"] ?? true;
+export const SIMULATOR_OUTPUT_CHANNEL: string = config?.["simulator"]?.["outputChannel"] ?? true;
+export const SIMULATOR_INTERACTIVE: boolean = config?.["simulator"]?.["interactive"] ?? false;
 export const DISCORD_API_KEY: string = config?.["apiKey"] ?? "";
 export const GUILD_ID: string = config?.["guildId"] ?? "";

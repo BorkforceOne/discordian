@@ -1,5 +1,5 @@
 import * as Discord from 'discord.js';
-import { DISCORD_API_KEY, GUILD_ID, Mode } from '../common';
+import { DISCORD_API_KEY, GUILD_ID, Mode, SIMULATOR_INTERACTIVE, SIMULATOR_OUTPUT_CHANNEL } from '../common';
 import { loadMetadataMap } from './simulation_utils';
 import { SimulatorConstructor } from './simulator';
 import { NoopSimulator } from './simulators/noop_simulator';
@@ -25,16 +25,18 @@ const SIMULATOR_MAP: { [M in Mode]: SimulatorConstructor } = {
         return;
       }
 
-      const simulatorChannel = guild.channels.cache.find(ch => ch.type === 'GUILD_TEXT' && ch.name === 'simulator') as Discord.TextChannel;
+      const simulatorChannel = guild.channels.cache.find(ch => ch.type === 'GUILD_TEXT' && ch.name === SIMULATOR_OUTPUT_CHANNEL) as Discord.TextChannel;
       if (simulatorChannel === undefined) {
-        console.log("Could not find simulator channel");
+        console.log(`Could not find ${SIMULATOR_OUTPUT_CHANNEL} channel`);
         return;
       }
 
       const metadataMap = loadMetadataMap();
       const simulator = new SIMULATOR_MAP[MODE]();
 
-      await simulator.run(metadataMap, simulatorChannel);
+      do {
+        await simulator.run(metadataMap, simulatorChannel);
+      } while (SIMULATOR_INTERACTIVE)
 
       process.exit();
     });

@@ -1,7 +1,8 @@
 import { MessageEmbed, TextChannel } from "discord.js";
-import { ALWAYS_GENERATE_NEW_MESSAGES, MetadataMap, SIMULATOR_DRY_RUN } from "../../common";
+import { ALWAYS_GENERATE_NEW_MESSAGES, MetadataMap, SIMULATOR_DRY_RUN, SIMULATOR_INTERACTIVE } from "../../common";
 import { networkSimulate } from "../simulation_utils";
 import { Simulator } from "../simulator";
+import * as inquirer from "inquirer";
 
 interface ThreadMessage {
   userId: string;
@@ -34,6 +35,16 @@ export class ThreadSimulator implements Simulator {
       await this.writeThread(thread, outputChannel);
       console.log(`Wrote thread ${index}`);
     }
+  }
+
+  async interactiveShouldShowThread(): Promise<boolean> {
+    const result = (await inquirer.prompt({
+      type: 'confirm',
+      name: 'showThread',
+      message: 'Send this thread?',
+    })).showThread;
+
+    return result;
   }
 
   private parseThreads(input: string): Thread[] {
@@ -111,12 +122,12 @@ export class ThreadSimulator implements Simulator {
 
     // Split any extra long conversations into separate threads
     for (const thread of threads) {
-      if (thread.messages.length > 20) {
+      if (thread.messages.length > 25) {
         threads.push({
           channel: thread.channel,
-          messages: thread.messages.slice(20),
+          messages: thread.messages.slice(25),
         });
-        thread.messages.length = 20;
+        thread.messages.length = 25;
       }
     }
 
@@ -141,12 +152,19 @@ export class ThreadSimulator implements Simulator {
         value: message.message,
       });
     }
+    
+    console.log(`${channel}`);
+    for (const message of messages) {
+      console.log(`${message.name}: ${message.value}`);
+    }
+    console.log("#########");
 
-    if (messages.length > 20) {
-      messages.length = 21;
+    let shouldShow = true;
+    if (SIMULATOR_INTERACTIVE) {
+      shouldShow = await this.interactiveShouldShowThread();
     }
 
-    if (!SIMULATOR_DRY_RUN) {
+    if (!SIMULATOR_DRY_RUN && shouldShow) {
       const output = new MessageEmbed()
       .setColor("#0099ff")
       .setTitle(`Simulation of ${channel}`)
@@ -155,11 +173,5 @@ export class ThreadSimulator implements Simulator {
 
       await outputChannel.send({ embeds: [output] });
     }
-
-    console.log(`${channel}`);
-    for (const message of messages) {
-      console.log(`${message.name}: ${message.value}`);
-    }
-    console.log("#########");
   }
 }
