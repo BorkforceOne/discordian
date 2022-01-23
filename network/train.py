@@ -12,7 +12,7 @@ def main():
     args = parser.parse_args()
 
     # Arguments
-    entry = str(args.entry)
+    entry_id = str(args.entry)
 
     # Metadata / config
     metadata = load_metadata()
@@ -24,22 +24,22 @@ def main():
 
     sess = gpt2.start_tf_sess()
 
-    def train_entry(sess, entry):
-        if entry not in metadata:
-            raise Exception("Entry not in metadata: " + entry)
+    def train_entry(sess, entry_id):
+        if entry_id not in metadata:
+            raise Exception("Entry not in metadata: " + entry_id)
 
-        entry = metadata[entry]
+        entry = metadata[entry_id]
         name = entry["name"]
 
-        print(f"\n=======Starting training for {entry} ({name})\n")
+        print(f"\n=======Starting training for {entry_id} ({name})\n")
 
-        input_filename = data_dir + entry + "_messages.txt"
+        input_filename = data_dir + entry_id + "_messages.txt"
 
         gpt2.finetune(sess,
                       sample_size=1024,
                       dataset=input_filename,
                       model_name=model_name,
-                      run_name=entry,
+                      run_name=entry_id,
                       save_every=100,
                       sample_every=max_steps + 1,
                       sample_num=0,
@@ -55,7 +55,7 @@ def main():
         gpt2.download_gpt2(model_name=model_name)
 
     # Train specific entry
-    sess = train_entry(sess, entry)
+    sess = train_entry(sess, entry_id)
 
 if __name__ == "__main__":
     main()
