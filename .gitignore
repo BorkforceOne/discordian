@@ -1,0 +1,7 @@
+.vscode/
+/data/*
+!/data/.gitkeep
+!/data/config.example.json
+/network/checkpoint/*
+/network/models/*
+node_modules

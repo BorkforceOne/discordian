@@ -1,0 +1,32 @@
+{
+    "apiKey": "",
+    "guildId": "",
+    "dumper": {
+        "maxMessagesPerChannel": 15000,
+        "sampleChannels": [],
+        "userDenylist": [],
+        "bannedStrings": [
+            "<@",
+            "{",
+            "}",
+            "<",
+            ">",
+            "`",
+            "[",
+            "]",
+            "+",
+            "%",
+            "^",
+            "~",
+            "@"
+        ]
+    },
+    "simulator": {
+        "alwaysGenerateNewMessages": true,
+        "dryRun": true
+    },
+    "training": {
+        "model": "124M",
+        "maxSteps": 3000
+    }
+}

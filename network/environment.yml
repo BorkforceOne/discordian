@@ -1,0 +1,14 @@
+name: discordian-network
+channels:
+  - nvidia/label/cuda-11.6.0
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - cuda
+  - cudnn=8.2.1.32
+  - pip
+  - pip:
+    - tensorflow==2.6.0
+    - tensorflow-gpu==2.6.0
+    - git+https://github.com/BorkforceOne/gpt-2-simple

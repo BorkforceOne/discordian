@@ -1,0 +1,1 @@
+conda run --no-capture-output -n discordian-network python simulate.py %*
