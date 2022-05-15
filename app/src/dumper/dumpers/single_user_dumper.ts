@@ -43,8 +43,7 @@ export class SingleUserDumper implements Dumper {
           name: user.displayName,
           prefix: MESSAGE_PREFIX,
           postfix: MESSAGE_POSTFIX,
-          delimitter: MESSAGE_DELIMITTER,
-          format: '\n**{0}**:\n{1}',
+          delimitter: MESSAGE_DELIMITTER
         };
       }
 

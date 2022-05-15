@@ -51,7 +51,7 @@ function loadConfig(): any {
 const config = loadConfig();
 export const SAMPLE_CHANNELS: string[] = config?.["dumper"]?.["sampleChannels"] ?? [];
 export const MAX_MESSAGES_PER_CHANNEL: number = config?.["dumper"]?.["maxMessagesPerChannel"] ?? 100;
-export const USER_DENYLIST: string[] = config?.["dumper"]?.["sampleChannels"] ?? [];
+export const USER_DENYLIST: string[] = config?.["dumper"]?.["userDenylist"] ?? [];
 export const BANNED_STRINGS: string[] = config?.["dumper"]?.["bannedStrings"] ?? [];
 export const ALWAYS_GENERATE_NEW_MESSAGES: boolean = config?.["simulator"]?.["alwaysGenerateNewMessages"] ?? false;
 export const SIMULATOR_DRY_RUN: boolean = config?.["simulator"]?.["dryRun"] ?? true;
