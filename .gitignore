@@ -4,4 +4,5 @@
 !/data/config.example.json
 /network/checkpoint/*
 /network/models/*
+/network/__pycache__/*
 node_modules
